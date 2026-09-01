@@ -56,7 +56,6 @@ const officerGroups: [string, [string, string][]][] = [
     ['Vice Chair, Campaigns and Membership', 'Deputises for the Chair, and leads on campaigning and on growing and keeping our membership.'],
     ['Treasurer', 'Looks after the money and files what the law and the Party require. Election spending returns carry legal deadlines.'],
     ['Women’s Officer', 'Represents women members and supports the women’s forum.'],
-    ['Trade Union Officer', 'Connects the CLP with affiliated unions locally.'],
   ]],
   ['Functional officers', [
     ['Political Education Officer', 'Organises the discussions, speakers and training.'],
@@ -69,6 +68,7 @@ const officerGroups: [string, [string, string][]][] = [
 ];
 
 const vacantRoles: [string, string][] = [
+  ['Trade Union Officer', 'Connects the CLP with affiliated unions locally. This one is an executive officer post, so it carries a seat on the Executive Committee.'],
   ['Disability Officer', 'Represents disabled members, and works on the accessibility of our meetings and campaigning.'],
   ['Communications Officer', 'Newsletters, social media and making sure members hear what is happening.'],
   ['Digital Coordinator', 'Looks after the CLP’s digital tools and data — including this handbook.'],
@@ -164,7 +164,7 @@ function Guide() {
         <li><CheckCircle2 />Talks, discussions and political education</li>
         <li><CheckCircle2 />Socials and fundraising events</li>
         <li><CheckCircle2 />Contributing to policy consultations</li>
-        <li><CheckCircle2 />Taking on a role — <a href="#officers">four posts are vacant</a></li>
+        <li><CheckCircle2 />Taking on a role — <a href="#officers">five posts are vacant</a></li>
         <li><CheckCircle2 />Raising an issue as a <a href="#local-motion">motion</a></li>
         <li><CheckCircle2 />Going to conference as a <a href="#delegate">delegate</a></li>
       </ul>
@@ -190,7 +190,7 @@ function Guide() {
     <article id="officers" className="guide-section"><span className="section-icon"><UsersRound /></span><p className="eyebrow">Running the CLP</p><h2>CLP officers</h2>
       <p>Officers are elected by members at the Annual General Meeting, held once a year. Any member of eight weeks’ standing can vote and can stand. Each ward branch also elects its own officers at a branch AGM, usually in the weeks before — branch roles are a smaller commitment and are the normal way people start.</p>
       {officerGroups.map(([group, roles]) => <div key={group}><h3>{group}</h3><div className="officer-list">{roles.map(([role, copy]) => <div key={role}><h3>{role}</h3><p>{copy}</p></div>)}</div></div>)}
-      <p className="rule-note">If none of the six executive officers is a BAME member, the BAME Officer also sits on the Executive Committee as a voting member.</p>
+      <p className="rule-note">If none of the executive officers is a BAME member, the BAME Officer also sits on the Executive Committee as a voting member.</p>
       <h3>Roles currently vacant</h3>
       <p>These posts are unfilled. If any of them sounds like something you would enjoy, it is genuinely available. Speak to the Chair, who can talk you through what a role involves and where you would best fit.</p>
       <div className="officer-list vacant-list">{vacantRoles.map(([role, copy]) => <div key={role}><h3>{role} <span className="vacant-tag">Vacant</span></h3><p>{copy}</p></div>)}</div>
