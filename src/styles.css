@@ -20,5 +20,9 @@
 .branch-card p { font-size:15px; }
 .branch-finder select { font-size:18px; }
 .finder-result p { font-size:14px; }
+.ward-help { margin-top:28px; padding:22px; border-left:4px solid var(--red); background:var(--cream); }
+.ward-help h3 { margin:0 0 8px; font-size:20px; }
+.ward-help p { margin:0 0 18px; font-size:16px; line-height:1.55; }
+.ward-help a { display:inline-flex; align-items:center; gap:8px; color:var(--red-dark); font-size:16px; font-weight:800; text-decoration:underline; text-underline-offset:4px; }
 @media(max-width:540px){.brand strong{font-size:15px}.hero h1{font-size:44px}}
 
