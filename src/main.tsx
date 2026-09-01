@@ -1,18 +1,18 @@
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ExternalLink, FilePenLine, Landmark, MapPin, Megaphone, Menu, Mic, Ticket, Users, UsersRound, Vote } from 'lucide-react';
+import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ExternalLink, FilePenLine, HeartHandshake, Landmark, MapPin, Megaphone, Menu, Mic, Network, Ticket, Users, UsersRound, Vote } from 'lucide-react';
 import './styles.css';
 
-const pages = ['home', 'calendar', 'get-involved', 'our-clp'] as const;
+const pages = ['home', 'calendar', 'get-involved'] as const;
 type Page = typeof pages[number];
-const href = (page: Page) => page === 'home' ? '#/' : `#/${page}`;
+const href = (page: Page, anchor?: string) => (page === 'home' ? '#/' : `#/${page}`) + (anchor ? `#${anchor}` : '');
 
-function A({ page, className, children }: { page: Page; className?: string; children: ReactNode }) {
-  return <a href={href(page)} className={className}>{children}</a>;
+function A({ page, anchor, className, children }: { page: Page; anchor?: string; className?: string; children: ReactNode }) {
+  return <a href={href(page, anchor)} className={className}>{children}</a>;
 }
 
 function Header() {
-  const nav: [string, Page][] = [['Home', 'home'], ['Calendar', 'calendar'], ['Member guide', 'get-involved'], ['CLP and branches', 'our-clp']];
+  const nav: [string, Page][] = [['Home', 'home'], ['Calendar', 'calendar'], ['Member guide', 'get-involved']];
   return <header className="site-header"><div className="shell header-inner">
     <A page="home" className="brand"><img className="brand-mark" src="./labour-rose.png" alt="Labour rose" /><span><strong>Finchley &amp; Golders Green</strong><small>Labour Party</small></span></A>
     <nav aria-label="Primary navigation">{nav.map(([label, page]) => <A page={page} key={page}>{label}</A>)}</nav>
@@ -26,15 +26,15 @@ function Intro({ kicker, title, children }: { kicker: string; title: string; chi
 
 function Home() {
   const cards = [
-    { page: 'calendar' as Page, Icon: CalendarDays, small: 'Meetings and events', title: 'Calendar', copy: 'Dates for branch meetings, CLP meetings, campaigning and social events.', cta: 'View the calendar' },
-    { page: 'get-involved' as Page, Icon: Landmark, small: 'Taking part', title: 'Member guide', copy: 'Voting, candidate selections, conference delegates and other ways to take part.', cta: 'Read the member guide' },
-    { page: 'our-clp' as Page, Icon: UsersRound, small: 'How decisions are made', title: 'CLP and branches', copy: 'Our delegate structure, the three branches and a ward-based branch finder.', cta: 'View the CLP structure' },
+    { page: 'calendar' as Page, anchor: undefined, Icon: CalendarDays, small: 'Meetings and events', title: 'Calendar', copy: 'Dates for branch meetings, CLP meetings, campaigning and social events.', cta: 'View the calendar' },
+    { page: 'get-involved' as Page, anchor: undefined, Icon: Landmark, small: 'Taking part', title: 'Member guide', copy: 'What a CLP is, how to get involved, voting, selections, motions and conference.', cta: 'Read the member guide' },
+    { page: 'get-involved' as Page, anchor: 'branches', Icon: MapPin, small: 'Three branches', title: 'Find your branch', copy: 'Your ward decides which branch you belong to. Look it up here.', cta: 'Find your branch' },
   ];
   return <main><section className="hero"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" /><div className="shell hero-grid">
-    <div><h1>Member handbook</h1><p className="hero-intro">Information for members of Finchley &amp; Golders Green Labour Party.</p><div className="hero-actions"><A page="calendar" className="button button-primary">View the calendar <ArrowRight size={18} /></A><A page="our-clp" className="button button-ghost">Find your branch</A></div></div>
+    <div><h1>Member handbook</h1><p className="hero-intro">Information for members of Finchley &amp; Golders Green Labour Party.</p><div className="hero-actions"><A page="calendar" className="button button-primary">View the calendar <ArrowRight size={18} /></A><A page="get-involved" anchor="branches" className="button button-ghost">Find your branch</A></div></div>
     <aside className="notice-card"><p className="notice-label">Start here</p><h2>Three first steps</h2><ol><li><span>1</span><div><strong>Find your branch</strong><small>Your ward decides which branch you belong to.</small></div></li><li><span>2</span><div><strong>Attend a meeting</strong><small>Dates and details are in the calendar.</small></div></li><li><span>3</span><div><strong>Take part</strong><small>Campaign, vote in Party ballots, attend events or suggest a speaker.</small></div></li></ol></aside>
   </div></section>
-  <section className="pathways shell"><div className="section-heading"><div><h2>Information for members</h2></div></div><div className="card-grid">{cards.map(({ page, Icon, small, title, copy, cta }) => <A page={page} className="path-card" key={page}><span className="icon-tile"><Icon size={24} /></span><small>{small}</small><h3>{title}</h3><p>{copy}</p><strong>{cta} <ArrowRight size={17} /></strong></A>)}</div></section></main>;
+  <section className="pathways shell"><div className="section-heading"><div><h2>Information for members</h2></div></div><div className="card-grid">{cards.map(({ page, anchor, Icon, small, title, copy, cta }) => <A page={page} anchor={anchor} className="path-card" key={title}><span className="icon-tile"><Icon size={24} /></span><small>{small}</small><h3>{title}</h3><p>{copy}</p><strong>{cta} <ArrowRight size={17} /></strong></A>)}</div></section></main>;
 }
 
 function Calendar() {
@@ -107,8 +107,22 @@ function SpeakerForm() {
   </div>;
 }
 
+const branchByWard: Record<string, string> = { 'Church End':'Church End, West Finchley & Woodhouse', 'West Finchley':'Church End, West Finchley & Woodhouse', 'Woodhouse':'Church End, West Finchley & Woodhouse', 'Golders Green':'Golders Green, Childs Hill & Cricklewood', 'Childs Hill':'Golders Green, Childs Hill & Cricklewood', 'Cricklewood':'Golders Green, Childs Hill & Cricklewood', 'East Finchley':'East Finchley & Hampstead Garden Suburb', 'Hampstead Garden Suburb':'East Finchley & Hampstead Garden Suburb' };
+
+function BranchFinder() {
+  const [ward, setWard] = useState('');
+  return <div className="branch-finder"><label htmlFor="ward">Which ward do you live in?</label><select id="ward" value={ward} onChange={e => setWard(e.target.value)}><option value="">Choose your ward</option>{Object.keys(branchByWard).map(name => <option value={name} key={name}>{name}</option>)}</select><div className={`finder-result ${ward ? 'visible' : ''}`} aria-live="polite">{ward && <><small>Your branch is</small><strong>{branchByWard[ward]}</strong><p>Your membership address normally determines your ward. If you are unsure, check your membership record or contact the CLP.</p></>}</div></div>;
+}
+
+const branches: [string, string, string][] = [
+  ['01', 'Church End, West Finchley & Woodhouse', 'Church End · West Finchley · Woodhouse'],
+  ['02', 'Golders Green, Childs Hill & Cricklewood', 'Golders Green · Childs Hill · Cricklewood'],
+  ['03', 'East Finchley & Hampstead Garden Suburb', 'East Finchley · Hampstead Garden Suburb'],
+];
+
 function Guide() {
   const navGroups: [string, [string, string][]][] = [
+    ['Your CLP', [['what-is-a-clp', 'What a CLP is'], ['branches', 'Your branch'], ['get-involved', 'Getting involved']]],
     ['Your vote', [['democracy', 'How party democracy works'], ['officers', 'CLP officers'], ['internal-elections', 'Internal Party elections'], ['selections', 'Selections']]],
     ['Raising something', [['local-motion', 'Ordinary local motions'], ['speakers', 'Suggest a speaker']]],
     ['Annual Conference', [['conference', 'What conference is'], ['conference-motion', 'Conference motions'], ['delegate', 'Being a delegate']]],
@@ -116,6 +130,43 @@ function Guide() {
   return <main className="content-page"><Intro kicker="Member guide" title="How members can take part">Voting, selections, events, campaigning, conference and the formal routes for raising an issue.</Intro><section className="shell guide-layout">
     <aside className="guide-nav">{navGroups.map(([group, links]) => <div className="nav-group" key={group}><p>{group}</p>{links.map(([id, label]) => <a href={'#' + id} key={id}>{label}</a>)}</div>)}</aside>
     <div className="guide-content">
+
+    <article id="what-is-a-clp" className="guide-section"><span className="section-icon"><Network /></span><p className="eyebrow">The basics</p><h2>What a CLP is</h2>
+      <p>A Constituency Labour Party — CLP — is the Labour Party in one parliamentary constituency. Ours is Finchley &amp; Golders Green. It is every member who lives here, organised into three ward branches, and it is the body that selects our candidates, debates policy, runs local campaigns and sends delegates to Annual Conference.</p>
+      <p>We are a <b>delegate CLP</b>, and that word decides how you take part.</p>
+      <div className="structure-flow"><div><span><UsersRound /></span><small>Members</small><strong>All members</strong><p>Attend and vote at their branch meeting</p></div><ArrowDown /><div><span><MapPin /></span><small>Three branches</small><strong>Branch meetings</strong><p>Discuss campaigns, nominations and motions</p></div><ArrowDown /><div><span><Building2 /></span><small>CLP</small><strong>General Committee</strong><p>Branch delegates make constituency-wide decisions</p></div></div>
+      <h3>What a delegate structure means</h3>
+      <p>Every member can attend and vote at their own branch meeting. Each branch then elects delegates to the <b>General Committee</b> — the GC — which is the constituency-wide decision-making meeting where motions are decided, nominations made and the CLP’s positions agreed.</p>
+      <p>In practice this means <b>your branch is your route in</b>. An issue, a motion, a nomination or an offer to help goes to your branch first, and your branch’s delegates carry it to the GC. You do not need to be a delegate to start something — you need to turn up to your branch.</p>
+    </article>
+
+    <article id="branches" className="guide-section"><span className="section-icon"><MapPin /></span><p className="eyebrow">Three branches</p><h2>Your branch</h2>
+      <p>The CLP has three branches. Your membership address normally determines which one you belong to.</p>
+      <div className="branch-grid">{branches.map(([n, name, wards]) => <article className="branch-card" key={n}><small>{n}</small><h3>{name}</h3><p>{wards}</p></article>)}</div>
+      <div className="ward-help"><h3>Not sure which ward you live in?</h3><p>Enter your postcode on WriteToThem to see your local councillors and representatives, then use the ward shown there in the finder below.</p><a href="https://www.writetothem.com/" target="_blank" rel="noreferrer">Find my ward and representatives <ExternalLink size={17} /></a></div>
+      <BranchFinder />
+    </article>
+
+    <article id="get-involved" className="guide-section"><span className="section-icon"><HeartHandshake /></span><p className="eyebrow">Taking part</p><h2>Getting involved</h2>
+      <p>There is no application process and no expectation that you already know how any of this works. Turning up is the whole first step.</p>
+      <h3>Come to a meeting</h3>
+      <p>Your branch meets regularly and the dates are on the <A page="calendar">calendar</A>. A typical meeting runs through apologies and minutes, a report on local campaigning, a discussion or a speaker, any motions or nominations, and time for questions.</p>
+      <p>You are not expected to speak, and you will not be put on the spot. Most people spend their first meeting listening, and that is completely normal. If you would rather not arrive alone, ask your Branch Secretary — someone will usually offer to meet you there.</p>
+      <h3>Campaign with us</h3>
+      <p>Canvassing — knocking on doors and asking people how they intend to vote — is the main thing local parties actually do, and it is far less daunting than it sounds. Sessions usually last a couple of hours, you go out in pairs, and someone experienced will go with you the first time.</p>
+      <p>You are not expected to know policy detail or to win an argument. The job is to listen, be pleasant, and record what people say so the party knows where its support is.</p>
+      <p>If doorstep conversations are not for you, there is plenty that is not knocking on doors: leafleting, phone banking, staffing a street stall, or helping enter the data after a session.</p>
+      <h3>Other ways to take part</h3>
+      <ul className="check-list two-col">
+        <li><CheckCircle2 />Talks, discussions and political education</li>
+        <li><CheckCircle2 />Socials and fundraising events</li>
+        <li><CheckCircle2 />Contributing to policy consultations</li>
+        <li><CheckCircle2 />Taking on a role — <a href="#officers">five posts are vacant</a></li>
+        <li><CheckCircle2 />Raising an issue as a <a href="#local-motion">motion</a></li>
+        <li><CheckCircle2 />Going to conference as a <a href="#delegate">delegate</a></li>
+      </ul>
+      <p className="rule-note"><b>If you have very little time,</b> that is fine and worth saying out loud. Members who do one leafleting round a year, or who only vote in ballots, are still members in good standing. Nobody is keeping score.</p>
+    </article>
 
     <article id="democracy" className="guide-section"><span className="section-icon"><Landmark /></span><p className="eyebrow">Membership democracy</p><h2>How Party democracy works</h2>
       <p>Labour makes its decisions by members voting. What confuses people is that the votes happen at different levels, on different timetables, run by different people — so “when do I get a say?” has no single answer. This section is the map; the ones after it are the detail.</p>
@@ -205,23 +256,31 @@ function Guide() {
   </section></main>;
 }
 
-const branchByWard: Record<string, string> = { 'Church End':'Church End, West Finchley & Woodhouse', 'West Finchley':'Church End, West Finchley & Woodhouse', 'Woodhouse':'Church End, West Finchley & Woodhouse', 'Golders Green':'Golders Green, Childs Hill & Cricklewood', 'Childs Hill':'Golders Green, Childs Hill & Cricklewood', 'Cricklewood':'Golders Green, Childs Hill & Cricklewood', 'East Finchley':'East Finchley & Hampstead Garden Suburb', 'Hampstead Garden Suburb':'East Finchley & Hampstead Garden Suburb' };
-
-function BranchFinder() {
-  const [ward, setWard] = useState('');
-  return <div className="branch-finder"><label htmlFor="ward">Which ward do you live in?</label><select id="ward" value={ward} onChange={e => setWard(e.target.value)}><option value="">Choose your ward</option>{Object.keys(branchByWard).map(name => <option value={name} key={name}>{name}</option>)}</select><div className={`finder-result ${ward ? 'visible' : ''}`} aria-live="polite">{ward && <><small>Your branch is</small><strong>{branchByWard[ward]}</strong><p>Your membership address normally determines your ward. If you are unsure, check your membership record or contact the CLP.</p></>}</div></div>;
-}
-
-function OurClp() {
-  const branches = [ ['01','Church End, West Finchley & Woodhouse','Church End · West Finchley · Woodhouse'], ['02','Golders Green, Childs Hill & Cricklewood','Golders Green · Childs Hill · Cricklewood'], ['03','East Finchley & Hampstead Garden Suburb','East Finchley · Hampstead Garden Suburb'] ];
-  return <main className="content-page"><Intro kicker="CLP structure" title="How the CLP works">The CLP has three branches. Your ward decides which branch you belong to.</Intro><section className="shell structure-section"><div className="structure-flow"><div><span><UsersRound /></span><small>Members</small><strong>All members</strong><p>Attend and vote at their branch meeting</p></div><ArrowDown /><div><span><MapPin /></span><small>Three branches</small><strong>Branch meetings</strong><p>Discuss campaigns, nominations and motions</p></div><ArrowDown /><div><span><Building2 /></span><small>CLP</small><strong>General Committee</strong><p>Branch delegates make constituency-wide decisions</p></div></div><div className="explainer"><h2>What is a delegate structure?</h2><div><p>Every member can attend their branch meeting. Each branch chooses delegates to attend the General Committee (GC), the main constituency-wide decision-making meeting.</p><p>Raise an issue, motion, nomination or volunteering offer through your branch first.</p></div></div></section><section className="branch-section"><div className="shell"><div className="section-heading"><div><h2>The three branches</h2></div><p>Your membership address normally determines your branch.</p></div><div className="branch-grid">{branches.map(([n,name,wards]) => <article className="branch-card" key={n}><small>{n}</small><h3>{name}</h3><p>{wards}</p></article>)}</div></div></section><section className="finder-section shell"><div className="finder-copy"><h2>Find your branch</h2><p>Select the ward shown on your Labour Party membership record.</p><div className="ward-help"><h3>Not sure which ward you live in?</h3><p>Enter your postcode on WriteToThem to see your local councillors and representatives. Use the ward shown there in the branch finder.</p><a href="https://www.writetothem.com/" target="_blank" rel="noreferrer">Find my ward and representatives <ExternalLink size={17} /></a></div></div><BranchFinder /></section></main>;
-}
-
 function App() {
-  const getPage = (): Page => { const slug = location.hash.replace(/^#\/?/, ''); return pages.includes(slug as Page) ? slug as Page : slug === '' ? 'home' : 'home'; };
-  const [page, setPage] = useState<Page>(getPage);
-  useEffect(() => { const onHash = () => { setPage(getPage()); window.scrollTo({ top: 0 }); }; addEventListener('hashchange', onHash); return () => removeEventListener('hashchange', onHash); }, []);
-  const View = page === 'calendar' ? Calendar : page === 'get-involved' ? Guide : page === 'our-clp' ? OurClp : Home;
+  const parse = (): { page: Page; anchor?: string } | null => {
+    const h = location.hash;
+    if (h && !h.startsWith('#/')) return null;
+    const [slug, anchor] = h.replace(/^#\/?/, '').split('#');
+    if (slug === 'our-clp') return { page: 'get-involved', anchor: anchor || 'what-is-a-clp' };
+    if (slug === '') return { page: 'home' };
+    return { page: (pages as readonly string[]).includes(slug) ? slug as Page : 'home', anchor };
+  };
+  const [page, setPage] = useState<Page>(() => parse()?.page ?? 'home');
+  useEffect(() => {
+    const apply = () => {
+      const r = parse();
+      if (!r) return;
+      setPage(r.page);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const el = r.anchor ? document.getElementById(r.anchor) : null;
+        if (el) el.scrollIntoView(); else window.scrollTo({ top: 0 });
+      }));
+    };
+    apply();
+    addEventListener('hashchange', apply);
+    return () => removeEventListener('hashchange', apply);
+  }, []);
+  const View = page === 'calendar' ? Calendar : page === 'get-involved' ? Guide : Home;
   return <><Header /><View /></>;
 }
 

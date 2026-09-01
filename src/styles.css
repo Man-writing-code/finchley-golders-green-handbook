@@ -56,3 +56,11 @@
 .officer-list + h3, .guide-content .officer-list ~ h3 { margin-top:30px; }
 .vacant-tag { display:inline-block; margin-left:7px; padding:2px 7px; border-radius:999px; background:var(--cream); color:var(--red-dark); font-size:10.5px; font-weight:900; text-transform:uppercase; letter-spacing:.08em; vertical-align:middle; }
 .vacant-list div { padding-left:12px; border-left:2px solid var(--line); }
+.guide-content .structure-flow { margin:26px 0 8px; gap:12px; }
+.guide-content .structure-flow strong { font-size:16px; }
+.guide-content .structure-flow p { font-size:13.5px; }
+.guide-content .branch-grid { margin-top:22px; }
+.guide-content .branch-card { min-height:200px; padding:22px; }
+.guide-content .branch-card h3 { margin-top:32px; font-size:20px; }
+.guide-content .branch-finder { margin-top:24px; }
+@media(max-width:850px){ .guide-content .structure-flow { grid-template-columns:1fr; } .guide-content .structure-flow > svg { transform:none; margin:auto; } .guide-content .branch-grid { grid-template-columns:1fr; } }
