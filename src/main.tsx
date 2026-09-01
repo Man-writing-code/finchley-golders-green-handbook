@@ -168,7 +168,7 @@ function Guide() {
     </article>
 
     <article id="democracy" className="guide-section"><span className="section-icon"><Landmark /></span><p className="eyebrow">Membership democracy</p><h2>How Party democracy works</h2>
-      <p>Labour makes its decisions by members voting. What confuses people is that the votes happen at different levels, on different timetables, run by different people — so “when do I get a say?” has no single answer. This section is the map; the ones after it are the detail.</p>
+      <p>Labour makes its decisions by members voting. What confuses people is that the votes happen at different levels, on different timetables, run by different people — so “when do I get a say?” has no single answer.</p>
       <p>Most decisions travel upwards: <b>you</b> → <b>your branch</b> → <b>the CLP</b> → <b>Annual Conference</b> → <b>the NEC and National Policy Forum</b>. A motion you write in your branch can end up debated at conference, and a delegate you elect carries the CLP’s vote there. Some decisions come the other way: selection timetables and leadership contests are set nationally, and the CLP runs its part rather than deciding when it happens.</p>
       <h3>What you get a vote on</h3>
       <div className="vote-list">{voteRows.map(([what, when, where]) => <div key={what}><strong>{what}</strong><small>{when}</small><small>{where}</small></div>)}</div>
@@ -176,7 +176,11 @@ function Guide() {
       <p>The most common question of all. The answer depends on how long you have been a member, counted to a fixed cut-off called the <b>relevant date</b> or <b>freeze date</b>. If you qualified on that date you can take part, even if the vote itself happens later.</p>
       <ul className="check-list"><li><CheckCircle2 /><span><b>8 weeks’ continuous membership</b> — to attend and vote at branch and CLP meetings, and to stand for branch and CLP roles</span></li><li><CheckCircle2 /><span><b>6 months’ continuous membership</b> — to be a delegate to Annual Conference</span></li><li><CheckCircle2 /><span><b>12 months’ continuous membership</b> — for some national roles and elections</span></li></ul>
       <p>You also need to be up to date with your subscription: a member in arrears cannot vote at Party meetings. This is much easier to fix a fortnight before a meeting than on the night.</p>
-      <p className="rule-note"><b>Nominating is not voting.</b> For most national elections the CLP meets and votes on who to <i>nominate</i>. That is a public endorsement, not the election. The ballot itself comes to you separately, and you are free to vote for someone else.</p>
+      <h3>Nominating and voting are two separate stages</h3>
+      <p>For the NEC, the NPF, leader and deputy leader, and several other positions, there are two steps, and it is easy to mistake one for the other.</p>
+      <p><b>First the CLP nominates.</b> A meeting is called, we hear about the candidates, and we vote on who the CLP will nominate. A nomination is a public endorsement and it carries real weight in a contest, but it does not elect anybody.</p>
+      <p><b>Then the election happens separately.</b> For the NEC and for leadership contests, a ballot comes to you individually by post or email, and you can vote for whoever you like regardless of who the CLP nominated. For the NPF, the election is decided by the relevant delegations at Annual Conference rather than by a ballot of every member.</p>
+      <p className="rule-note">So if you nominated one candidate at a meeting and then voted for a different one at home, you have done nothing wrong. The two votes are genuinely independent, and your individual ballot is secret.</p>
     </article>
 
     <article id="officers" className="guide-section"><span className="section-icon"><UsersRound /></span><p className="eyebrow">Running the CLP</p><h2>CLP officers</h2>
