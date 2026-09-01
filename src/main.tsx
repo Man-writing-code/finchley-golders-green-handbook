@@ -50,16 +50,30 @@ const voteRows: [string, string, string][] = [
   ['Leader and deputy leader', 'When a vacancy occurs', 'Ballot sent to you'],
 ];
 
-const officers: [string, string][] = [
-  ['Chair', 'Runs meetings, keeps them to time and to the rules, and sets the agenda with the Secretary.'],
-  ['Vice Chair', 'Deputises for the Chair, often with a defined brief such as membership or campaigns.'],
-  ['Secretary', 'The engine room. Convenes meetings, sends the notices, keeps the minutes and is the CLP’s formal channel to the regional office.'],
-  ['Treasurer', 'Looks after the money and files what the law and the Party require. Election spending returns carry legal deadlines.'],
-  ['Membership Secretary', 'Welcomes new members, keeps membership records in order and follows up lapsed members.'],
-  ['Political Education Officer', 'Organises the discussions, speakers and training.'],
-  ['Women’s Officer', 'Represents women members and supports the women’s forum.'],
-  ['Youth Officer', 'Represents members under 27 and links to Young Labour.'],
-  ['Trade Union Liaison Officer', 'Connects the CLP with affiliated unions locally.'],
+const officerGroups: [string, [string, string][]][] = [
+  ['Executive officers', [
+    ['Chair', 'Runs meetings, keeps them to time and to the rules, and sets the agenda with the Secretary.'],
+    ['Secretary', 'The engine room. Convenes meetings, sends the notices, keeps the minutes and is the CLP’s formal channel to the regional office.'],
+    ['Vice Chair, Campaigns and Membership', 'Deputises for the Chair, and leads on campaigning and on growing and keeping our membership.'],
+    ['Treasurer', 'Looks after the money and files what the law and the Party require. Election spending returns carry legal deadlines.'],
+    ['Women’s Officer', 'Represents women members and supports the women’s forum.'],
+    ['Trade Union Officer', 'Connects the CLP with affiliated unions locally.'],
+  ]],
+  ['Functional officers', [
+    ['Political Education Officer', 'Organises the discussions, speakers and training.'],
+    ['LGBT+ Officer', 'Represents LGBT+ members and links the CLP to LGBT+ Labour.'],
+    ['BAME Officer', 'Represents Black, Asian and minority ethnic members.'],
+    ['Policy Officer', 'Coordinates policy discussion locally and the CLP’s input into policy consultations.'],
+    ['Youth Officer', 'Represents members under 27 and links to Young Labour.'],
+  ]],
+];
+
+const vacantRoles: [string, string][] = [
+  ['Disability Officer', 'Represents disabled members, and works on the accessibility of our meetings and campaigning.'],
+  ['Communications Officer', 'Newsletters, social media and making sure members hear what is happening.'],
+  ['Digital Coordinator', 'Looks after the CLP’s digital tools and data — including this handbook.'],
+  ['Campaign Coordinator', 'Organises canvassing sessions and campaign days across the branches.'],
+  ['Events and Fundraising Coordinator', 'Socials, fundraisers and events for members.'],
 ];
 
 const jargon: [string, string][] = [
@@ -95,7 +109,7 @@ function SpeakerForm() {
 
 function Guide() {
   const navGroups: [string, [string, string][]][] = [
-    ['Your vote', [['democracy', 'How party democracy works'], ['agm', 'Your CLP AGM'], ['internal-elections', 'Internal Party elections'], ['selections', 'Selections']]],
+    ['Your vote', [['democracy', 'How party democracy works'], ['officers', 'CLP officers'], ['internal-elections', 'Internal Party elections'], ['selections', 'Selections']]],
     ['Raising something', [['local-motion', 'Ordinary local motions'], ['speakers', 'Suggest a speaker']]],
     ['Annual Conference', [['conference', 'What conference is'], ['conference-motion', 'Conference motions'], ['delegate', 'Being a delegate']]],
   ];
@@ -115,11 +129,12 @@ function Guide() {
       <p className="rule-note"><b>Nominating is not voting.</b> For most national elections the CLP meets and votes on who to <i>nominate</i>. That is a public endorsement, not the election. The ballot itself comes to you separately, and you are free to vote for someone else.</p>
     </article>
 
-    <article id="agm" className="guide-section"><span className="section-icon"><UsersRound /></span><p className="eyebrow">Local elections</p><h2>Your CLP AGM</h2>
-      <p>The Annual General Meeting is the one meeting a year where members decide who runs the local Party. It is on a fixed annual cycle, everything about it is decided by us rather than nationally, and any member of eight weeks’ standing can vote and can stand. If you have ever thought “I’d quite like to do something”, this is where that turns into a job.</p>
-      <p>The AGM elects the CLP officers, other committee places, and delegates to conference and other bodies. Each ward branch elects its own officers at a branch AGM, usually held in the weeks before. Branch roles are a smaller commitment and are the normal way people start — branches are where campaigning actually gets organised.</p>
-      <h3>The officers, and what they actually do</h3>
-      <div className="officer-list">{officers.map(([role, copy]) => <div key={role}><h3>{role}</h3><p>{copy}</p></div>)}</div>
+    <article id="officers" className="guide-section"><span className="section-icon"><UsersRound /></span><p className="eyebrow">Running the CLP</p><h2>CLP officers</h2>
+      <p>Officers are elected by members at the Annual General Meeting, held once a year. Any member of eight weeks’ standing can vote and can stand. Each ward branch also elects its own officers at a branch AGM, usually in the weeks before — branch roles are a smaller commitment and are the normal way people start.</p>
+      {officerGroups.map(([group, roles]) => <div key={group}><h3>{group}</h3><div className="officer-list">{roles.map(([role, copy]) => <div key={role}><h3>{role}</h3><p>{copy}</p></div>)}</div></div>)}
+      <h3>Roles currently vacant</h3>
+      <p>These posts are unfilled. If any of them sounds like something you would enjoy, it is genuinely available — speak to the Secretary or any officer.</p>
+      <div className="officer-list vacant-list">{vacantRoles.map(([role, copy]) => <div key={role}><h3>{role} <span className="vacant-tag">Vacant</span></h3><p>{copy}</p></div>)}</div>
       <h3>How to stand</h3>
       <ol className="plain-steps">
         <li><b>Decide roughly what you would want to do.</b> If you are unsure, ask the current holder what the job is really like. Most will tell you honestly.</li>
@@ -128,7 +143,7 @@ function Guide() {
         <li><b>Write a short statement.</b> A few sentences on why you want the role beats a CV.</li>
         <li><b>Turn up.</b> Contested posts involve a brief speech and then a vote.</li>
       </ol>
-      <p className="rule-note">You do not need permission and you do not need years of membership. Eight weeks and a proposer is the whole requirement. Some posts attract no nominations at all and are filled from the floor on the night.</p>
+      <p className="rule-note">You do not need permission and you do not need years of membership. Eight weeks and a proposer is the whole requirement. Vacant posts can be filled between AGMs, so you do not always have to wait for the next one.</p>
     </article>
 
     <article id="internal-elections" className="guide-section"><span className="section-icon"><Vote /></span><p className="eyebrow">National ballots</p><h2>Internal Party elections</h2>
