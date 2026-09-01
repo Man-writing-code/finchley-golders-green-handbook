@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ExternalLink, FilePenLine, HeartHandshake, Landmark, MapPin, Megaphone, Menu, MessageSquare, Mic, Network, Ticket, Users, UsersRound, Vote } from 'lucide-react';
+import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ChevronDown, ExternalLink, FilePenLine, HeartHandshake, Landmark, MapPin, Megaphone, Menu, MessageSquare, Mic, Network, Ticket, Users, UsersRound, Vote } from 'lucide-react';
 import './styles.css';
 
 const pages = ['home', 'calendar', 'get-involved'] as const;
@@ -120,6 +120,7 @@ const branches: [string, string, string][] = [
 ];
 
 function Guide() {
+  const [navOpen, setNavOpen] = useState(false);
   const navGroups: [string, [string, string][]][] = [
     ['Your CLP', [['what-is-a-clp', 'What a CLP is'], ['branches', 'Your branch'], ['get-involved', 'Getting involved']]],
     ['Your vote', [['democracy', 'How party democracy works'], ['officers', 'CLP officers'], ['internal-elections', 'Internal Party elections'], ['selections', 'Selections']]],
@@ -127,7 +128,10 @@ function Guide() {
     ['Annual Conference', [['conference', 'What conference is'], ['conference-motion', 'Conference motions'], ['delegate', 'Being a delegate']]],
   ];
   return <main className="content-page"><Intro kicker="Member guide" title="How members can take part">Voting, selections, events, campaigning, conference and the formal routes for raising an issue.</Intro><section className="shell guide-layout">
-    <aside className="guide-nav">{navGroups.map(([group, links]) => <div className="nav-group" key={group}><p>{group}</p>{links.map(([id, label]) => <a href={'#' + id} key={id}>{label}</a>)}</div>)}</aside>
+    <aside className={navOpen ? 'guide-nav open' : 'guide-nav'}>
+      <button type="button" className="guide-nav-toggle" aria-expanded={navOpen} aria-controls="guide-nav-groups" onClick={() => setNavOpen(o => !o)}>Jump to a section <ChevronDown size={18} /></button>
+      <div className="nav-groups" id="guide-nav-groups">{navGroups.map(([group, links]) => <div className="nav-group" key={group}><p>{group}</p>{links.map(([id, label]) => <a href={'#' + id} key={id} onClick={() => setNavOpen(false)}>{label}</a>)}</div>)}</div>
+    </aside>
     <div className="guide-content">
 
     <article id="what-is-a-clp" className="guide-section"><span className="section-icon"><Network /></span><p className="eyebrow">The basics</p><h2>What a CLP is</h2>
