@@ -195,10 +195,9 @@ function Guide() {
       <h3>How to stand</h3>
       <ol className="plain-steps">
         <li><b>Decide roughly what you would want to do.</b> If you are unsure, ask the current holder what the job is really like. Most will tell you honestly.</li>
-        <li><b>Find a proposer.</b> Anyone eligible to vote in the CLP can propose you.</li>
+        <li><b>Find a proposer.</b> Anyone eligible to vote in the CLP can propose you. If you do not know anybody well enough to ask yet, that is not a barrier: you can usually find a proposer in the room on the night.</li>
         <li><b>Get your nomination in before the deadline.</b> The Secretary’s notice sets out the posts, the deadline and the format. The deadline is usually well before the meeting, and missing it is the most common reason people do not stand.</li>
-        <li><b>Write a short statement.</b> A few sentences on why you want the role beats a CV.</li>
-        <li><b>Turn up.</b> Contested posts involve a brief speech and then a vote.</li>
+        <li><b>Turn up.</b> Contested posts involve a brief speech and then a vote. We do not normally ask candidates for written statements.</li>
       </ol>
       <p className="rule-note">You do not need permission and you do not need years of membership. Eight weeks and a proposer is the whole requirement. Vacant posts can be filled between AGMs, so you do not always have to wait for the next one.</p>
     </article>
