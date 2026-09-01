@@ -20,10 +20,6 @@ function Header() {
   </div></header>;
 }
 
-function Footer() {
-  return <footer><div className="shell footer-inner"><div className="brand footer-brand"><span className="brand-mark">F&amp;G</span><span><strong>Finchley &amp; Golders Green</strong><small>Labour Party</small></span></div></div></footer>;
-}
-
 function Intro({ kicker, title, children }: { kicker: string; title: string; children: ReactNode }) {
   return <section className="page-intro"><div className="shell narrow"><p className="kicker"><span />{kicker}</p><h1>{title}</h1><p>{children}</p></div></section>;
 }
@@ -79,7 +75,7 @@ function App() {
   const [page, setPage] = useState<Page>(getPage);
   useEffect(() => { const onHash = () => { setPage(getPage()); window.scrollTo({ top: 0 }); }; addEventListener('hashchange', onHash); return () => removeEventListener('hashchange', onHash); }, []);
   const View = page === 'calendar' ? Calendar : page === 'get-involved' ? Guide : page === 'our-clp' ? OurClp : Home;
-  return <><Header /><View /><Footer /></>;
+  return <><Header /><View /></>;
 }
 
 createRoot(document.getElementById('root')!).render(<App />);
