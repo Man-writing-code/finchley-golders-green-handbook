@@ -131,11 +131,10 @@ function Guide() {
     <div className="guide-content">
 
     <article id="what-is-a-clp" className="guide-section"><span className="section-icon"><Network /></span><p className="eyebrow">The basics</p><h2>What a CLP is</h2>
-      <p>A Constituency Labour Party — CLP — is the Labour Party in one parliamentary constituency. Ours is Finchley &amp; Golders Green. It is every member who lives here, organised into three ward branches, and it is the body that selects our candidates, debates policy, runs local campaigns and sends delegates to Annual Conference.</p>
-      <p>We are a <b>delegate CLP</b>, and that word decides how you take part.</p>
+      <p>A Constituency Labour Party often shortened to CLP is the Labour Party in one parliamentary constituency. Ours is Finchley &amp; Golders Green. It is every member who lives here, organised into three ward branches, and it is the body that selects our candidates, debates policy, runs local campaigns and sends delegates to Annual Conference.</p>
       <div className="structure-flow"><div><span><UsersRound /></span><small>Members</small><strong>All members</strong><p>Attend and vote at their branch meeting</p></div><ArrowDown /><div><span><MapPin /></span><small>Three branches</small><strong>Branch meetings</strong><p>Discuss campaigns, nominations and motions</p></div><ArrowDown /><div><span><Building2 /></span><small>CLP</small><strong>General Committee</strong><p>Branch delegates make constituency-wide decisions</p></div></div>
       <h3>What a delegate structure means</h3>
-      <p>Every member can attend and vote at their own branch meeting. Each branch then elects delegates to the <b>General Committee</b> — the GC — which is the constituency-wide decision-making meeting where motions are decided, nominations made and the CLP’s positions agreed.</p>
+      <p>Every member can attend and vote at their own branch meeting. Each branch then elects delegates to the <b>General Committee</b> the GC which is the constituency-wide decision-making meeting where motions are decided, nominations made and the CLP’s positions agreed.</p>
       <p>In practice this means <b>your branch is your route in</b>. An issue, a motion, a nomination or an offer to help goes to your branch first, and your branch’s delegates carry it to the GC. You do not need to be a delegate to start something — you need to turn up to your branch.</p>
     </article>
 
