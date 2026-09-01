@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ExternalLink, FilePenLine, HeartHandshake, Landmark, MapPin, Megaphone, Menu, Mic, Network, Ticket, Users, UsersRound, Vote } from 'lucide-react';
+import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ExternalLink, FilePenLine, HeartHandshake, Landmark, MapPin, Megaphone, Menu, MessageSquare, Mic, Network, Ticket, Users, UsersRound, Vote } from 'lucide-react';
 import './styles.css';
 
 const pages = ['home', 'calendar', 'get-involved'] as const;
@@ -123,7 +123,7 @@ function Guide() {
   const navGroups: [string, [string, string][]][] = [
     ['Your CLP', [['what-is-a-clp', 'What a CLP is'], ['branches', 'Your branch'], ['get-involved', 'Getting involved']]],
     ['Your vote', [['democracy', 'How party democracy works'], ['officers', 'CLP officers'], ['internal-elections', 'Internal Party elections'], ['selections', 'Selections']]],
-    ['Raising something', [['local-motion', 'Ordinary local motions'], ['speakers', 'Suggest a speaker']]],
+    ['Speaking up', [['meetings', 'Coming to meetings'], ['speakers', 'Suggest a speaker'], ['local-motion', 'Ordinary local motions']]],
     ['Annual Conference', [['conference', 'What conference is'], ['conference-motion', 'Conference motions'], ['delegate', 'Being a delegate']]],
   ];
   return <main className="content-page"><Intro kicker="Member guide" title="How members can take part">Voting, selections, events, campaigning, conference and the formal routes for raising an issue.</Intro><section className="shell guide-layout">
@@ -222,8 +222,22 @@ function Guide() {
       <p className="rule-note">Ballot eligibility and timetables change between contests. The instructions issued for the specific selection are always the authority.</p>
     </article>
 
+    <article id="meetings" className="guide-section"><span className="section-icon"><MessageSquare /></span><p className="eyebrow">Taking part</p><h2>Coming to meetings and joining in</h2>
+      <p>Most of what the CLP does happens at meetings, and you are welcome at yours whether or not you intend to say a word.</p>
+      <h3>You can just listen</h3>
+      <p>Plenty of members come along, listen, and go home again. That is a perfectly normal way to be a member. Nobody will ask you to justify being there, and you will not be put on the spot.</p>
+      <h3>You can join in</h3>
+      <p>If you do want to speak, catch the Chair’s eye or put your hand up and wait to be called. You do not need to know the procedure or the right form of words. The Chair will bring you in, and nobody minds if you get the wording wrong.</p>
+      <h3>If there is something you want raised</h3>
+      <p>Have a word with your Branch Chair or Branch Secretary before the meeting, or with the CLP Chair or Secretary if it affects the whole constituency. They can tell you the best route, which might be an item on the agenda, a question, a short discussion, a speaker, or occasionally a motion.</p>
+      <p>Getting in touch beforehand is the single most useful thing you can do. It means your issue can be planned into the agenda with time set aside for it, rather than squeezed into any other business at the end when everyone is putting their coat on.</p>
+      <p className="rule-note">A motion is only one of the routes, and it is the most formal one. Most of what members want to raise never needs one.</p>
+    </article>
+
+    <article id="speakers" className="guide-section"><span className="section-icon"><Mic /></span><p className="eyebrow">Meetings and events</p><h2>Suggest a speaker</h2><p>Know someone members would benefit from hearing? Suggest a speaker or topic for a future CLP or branch event. A suggestion does not guarantee an invitation, but it helps the team plan a useful programme.</p><SpeakerForm /></article>
+
     <article id="local-motion" className="guide-section"><span className="section-icon"><FilePenLine /></span><p className="eyebrow">Branch and GC business</p><h2>Ordinary local motions</h2>
-      <p>A local motion is a formal way to ask a branch or the General Committee to take a position or action. It is most useful when a clear decision is actually needed. You can also raise questions, volunteer, join a discussion or suggest an activity without writing a motion.</p>
+      <p>A local motion is the most formal way to raise something. It asks a branch or the General Committee to take a position or an action, and it is worth using when a clear decision is genuinely needed and you want it recorded. For most things members want to raise, a quiet word beforehand works better, so read this alongside <a href="#meetings">coming to meetings</a>.</p>
       <ol className="plain-steps">
         <li><b>Speak to your Branch Secretary first.</b> They can advise whether a motion is needed and tell you the agenda deadline.</li>
         <li><b>Keep it practical.</b> State the issue and the action requested, within the powers of the branch or CLP.</li>
@@ -231,8 +245,6 @@ function Guide() {
       </ol>
       <p className="rule-note">Motions to Annual Conference are a different thing with different rules — see <a href="#conference-motion">conference motions</a>.</p>
     </article>
-
-    <article id="speakers" className="guide-section"><span className="section-icon"><Mic /></span><p className="eyebrow">Meetings and events</p><h2>Suggest a speaker</h2><p>Know someone members would benefit from hearing? Suggest a speaker or topic for a future CLP or branch event. A suggestion does not guarantee an invitation, but it helps the team plan a useful programme.</p><SpeakerForm /></article>
 
     <article id="conference" className="guide-section"><span className="section-icon"><Building2 /></span><p className="eyebrow">Annual Conference</p><h2>What conference is</h2>
       <p>Annual Conference is the Party’s sovereign decision-making body. It agrees policy, decides rule changes, hears the reports of the NEC and the National Policy Forum, and elects a number of national positions. CLPs are represented there by delegates that members elect — which is how a decision taken in a branch meeting in Finchley can end up as Party policy.</p>
