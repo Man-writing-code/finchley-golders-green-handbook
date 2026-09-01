@@ -84,10 +84,23 @@ const jargon: [string, string][] = [
 ];
 
 const delegateSteps = [
-  ['Check you are eligible', 'You must have been an individual member for at least six months by the closing date, and be up to date with your subscription. The official call for each conference is the final authority.'],
-  ['Apply through your branch', 'You can normally self-nominate or be nominated with your consent. Include your name, membership number, the role you seek and confirmation of eligibility.'],
-  ['Branch nomination', 'Each branch considers applications and agrees which members to nominate to the General Committee (GC).'],
-  ['GC selection', 'GC delegates agree the final delegation. Where a choice is needed, it is decided by secret ballot.'],
+  ['Check you are eligible', 'You must have been an individual member for at least six months at the closing date set for delegates’ names, and be up to date with your subscription. The official call for each conference is the final authority.'],
+  ['Apply through your branch', 'You can self-nominate, or be nominated by another member with your consent. Include your name, membership number, the place you are applying for and confirmation of eligibility.'],
+  ['Branch nominations', 'Branches consider the applications at their spring meetings and agree who to nominate to the General Committee.'],
+  ['GC selection', 'The GC considers the branch nominations and agrees the final delegation. Where a choice is needed it is decided by secret ballot.'],
+];
+
+const delegatePlaces: [string, string][] = [
+  ['First delegate', 'Must be a woman, and also attends Women’s Conference, which is held on the Saturday immediately before Annual Conference.'],
+  ['Youth delegate', 'Where we have an eligible applicant, to support younger members taking part.'],
+  ['Additional delegate', 'To the main Annual Conference.'],
+];
+
+const delegateCosts: [string, string][] = [
+  ['Travel', 'The CLP pays your rail fare. All CLP delegates take part in the Party’s pooled fare scheme, choosing either a Party-arranged ticket or making their own arrangements. Cheaper options such as car sharing can be claimed for too.'],
+  ['Accommodation', 'You book your own, and the CLP can help coordinate sharing between delegates and other members going. Conference accommodation is expensive, so book refundable options early. Staying slightly out from the centre and claiming the transport in is often cheaper.'],
+  ['Subsistence', 'A per diem is paid for each day of conference.'],
+  ['Getting your money back', 'Send receipts to the Treasurer. Because travel and accommodation usually have to be booked well ahead, you can claim as soon as you have paid rather than waiting until after conference. Valid claims are reimbursed promptly.'],
 ];
 
 function SpeakerForm() {
@@ -265,12 +278,36 @@ function Guide() {
     </article>
 
     <article id="delegate" className="guide-section final-guide"><span className="section-icon"><Ticket /></span><p className="eyebrow">Annual Conference</p><h2>Being a delegate</h2>
-      <p>Conference delegates represent the CLP in formal conference business: listening to debates, taking part in votes and ballots, and carrying local priorities into the wider Party. You need six months’ continuous membership, and at least every second delegate a CLP sends must be a woman — so the make-up of the delegation affects who can be elected in a given year.</p>
+      <p>Delegates represent the CLP in conference business: listening to the debates, taking part in the votes and ballots, and carrying our priorities into the wider Party. We welcome first-time delegates, and we would like applications from members of all backgrounds.</p>
+
+      <h3>Who can apply</h3>
+      <p>You must have been an individual member of the Party for at least <b>six months</b> at the closing date set for delegates’ names. You can put yourself forward, or another member can nominate you with your consent. At least every second delegate a CLP sends must be a woman, so the make-up of the delegation affects who can be elected in a given year.</p>
+      <p className="rule-note">If access needs, caring responsibilities, money or anything else feels like a barrier, speak to your Branch Secretary before you rule yourself out. We will do what we can to put support in place, and the costs below are covered by the CLP rather than by you.</p>
+
+      <h3>The places we send</h3>
+      <p>The CLP plans to send three delegates as standard, and if there is enough interest we will look at funding a fourth, for example by crowdfunding.</p>
+      <div className="officer-list">{delegatePlaces.map(([place, copy]) => <div key={place}><h3>{place}</h3><p>{copy}</p></div>)}</div>
+
       <h3>How to apply</h3>
       <div className="process-list">{delegateSteps.map(([title, copy], i) => <div className="process-step" key={title}><span>{i + 1}</span><div><h3>{title}</h3><p>{copy}</p></div></div>)}</div>
-      <div className="draft-callout"><strong>Timetable — dates to be confirmed</strong><p>The cycle runs in this order: <b>applications</b> close, then <b>branch nominations</b>, then <b>GC selection</b>, then <b>Party accreditation</b>. Dates for the next conference will be published here once confirmed. Ask your Branch Secretary in the meantime, and check whether any costs are covered before you apply.</p></div>
+      <div className="draft-callout"><strong>Dates for 2027: to be confirmed</strong><p>The Party has not yet published the dates or the location for the 2027 Annual Conference, so we cannot give you the deadlines yet. The cycle normally runs in this order: branch nominations in the spring, GC selection early in the summer, then a strict Party deadline for the CLP to submit its delegates, with conference itself at the end of September. This section will be updated as soon as the dates are announced. Watch the calendar and ask your Branch Secretary in the meantime.</p></div>
+
+      <h3>What it costs you</h3>
+      <p>Short answer: it should not cost you anything you cannot claim back.</p>
+      <div className="officer-list">{delegateCosts.map(([item, copy]) => <div key={item}><h3>{item}</h3><p>{copy}</p></div>)}</div>
+      <p className="rule-note">The exact pooled fare and per diem amounts are set for each conference. Ask the Treasurer for the current figures before you book anything.</p>
+
       <h3>What delegates commit to</h3>
-      <ul className="check-list two-col"><li><CheckCircle2 />Attend conference business while it is in session</li><li><CheckCircle2 />Take part in key votes and ballots</li><li><CheckCircle2 />Engage with briefings on CLP priorities</li><li><CheckCircle2 />Follow safeguarding and behaviour expectations</li><li><CheckCircle2 />Give members a written report after conference</li><li><CheckCircle2 />Answer questions at a GC meeting</li></ul>
+      <p>Conference has fringe events and plenty of networking, but delegates are there first to take part in conference business.</p>
+      <ul className="check-list two-col">
+        <li><CheckCircle2 />Be in the hall while conference is in session, unless there is an agreed reason such as access needs or official duties</li>
+        <li><CheckCircle2 />Take part in the key votes and ballots</li>
+        <li><CheckCircle2 />Engage with briefings on the CLP’s priorities</li>
+        <li><CheckCircle2 />Follow the Party’s expectations on safeguarding and behaviour</li>
+        <li><CheckCircle2 />Write a short report for members afterwards</li>
+        <li><CheckCircle2 />Give a verbal report and take questions at a GC meeting</li>
+      </ul>
+      <p className="rule-note">Questions about any of this go to your Branch Secretary in the first instance.</p>
     </article>
 
     </div>
