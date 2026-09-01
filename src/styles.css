@@ -27,3 +27,4 @@
 @media(max-width:540px){.brand strong{font-size:15px}.hero h1{font-size:44px}}
 /* Header rose logo */
 .brand img.brand-mark { display:block; object-fit:cover; }
+.form-button { width:max-content; margin-top:18px; background:var(--red-dark); color:white; }
