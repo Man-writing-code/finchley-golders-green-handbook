@@ -188,13 +188,13 @@ function Guide() {
       {officerGroups.map(([group, roles]) => <div key={group}><h3>{group}</h3><div className="officer-list">{roles.map(([role, copy]) => <div key={role}><h3>{role}</h3><p>{copy}</p></div>)}</div></div>)}
       <p className="rule-note">If none of the six executive officers is a BAME member, the BAME Officer also sits on the Executive Committee as a voting member.</p>
       <h3>Roles currently vacant</h3>
-      <p>These posts are unfilled. If any of them sounds like something you would enjoy, it is genuinely available — speak to the Secretary or any officer.</p>
+      <p>These posts are unfilled. If any of them sounds like something you would enjoy, it is genuinely available. Speak to the Chair, who can talk you through what a role involves and where you would best fit.</p>
       <div className="officer-list vacant-list">{vacantRoles.map(([role, copy]) => <div key={role}><h3>{role} <span className="vacant-tag">Vacant</span></h3><p>{copy}</p></div>)}</div>
       <h3>Who else attends</h3>
       <p>Alongside the officers, the Executive Committee is attended by the three Branch Secretaries, our Member of Parliament and our London Assembly Member. Each branch may also send up to two observers.</p>
       <h3>How to stand</h3>
       <ol className="plain-steps">
-        <li><b>Decide roughly what you would want to do.</b> If you are unsure, ask the current holder what the job is really like. Most will tell you honestly.</li>
+        <li><b>Decide roughly what you would want to do.</b> If you are unsure, ask the current holder what the job is really like. Most will tell you honestly. If the post is vacant, or you would like a steer on where you would be most useful, ask the Chair.</li>
         <li><b>Find a proposer.</b> Anyone eligible to vote in the CLP can propose you. If you do not know anybody well enough to ask yet, that is not a barrier: you can usually find a proposer in the room on the night.</li>
         <li><b>Get your nomination in before the deadline.</b> The Secretary’s notice sets out the posts, the deadline and the format. The deadline is usually well before the meeting, and missing it is the most common reason people do not stand.</li>
         <li><b>Turn up.</b> Contested posts involve a brief speech and then a vote. We do not normally ask candidates for written statements.</li>
