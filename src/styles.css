@@ -25,4 +25,5 @@
 .ward-help p { margin:0 0 18px; font-size:16px; line-height:1.55; }
 .ward-help a { display:inline-flex; align-items:center; gap:8px; color:var(--red-dark); font-size:16px; font-weight:800; text-decoration:underline; text-underline-offset:4px; }
 @media(max-width:540px){.brand strong{font-size:15px}.hero h1{font-size:44px}}
-
+/* Header rose logo */
+.brand img.brand-mark { display:block; object-fit:cover; }

@@ -14,7 +14,7 @@ function A({ page, className, children }: { page: Page; className?: string; chil
 function Header() {
   const nav: [string, Page][] = [['Home', 'home'], ['Calendar', 'calendar'], ['Member guide', 'get-involved'], ['CLP and branches', 'our-clp']];
   return <header className="site-header"><div className="shell header-inner">
-    <A page="home" className="brand"><span className="brand-mark">F&amp;G</span><span><strong>Finchley &amp; Golders Green</strong><small>Labour Party</small></span></A>
+    <A page="home" className="brand"><img className="brand-mark" src="./labour-rose.png" alt="Labour rose" /><span><strong>Finchley &amp; Golders Green</strong><small>Labour Party</small></span></A>
     <nav aria-label="Primary navigation">{nav.map(([label, page]) => <A page={page} key={page}>{label}</A>)}</nav>
     <details className="mobile-menu"><summary aria-label="Open menu"><Menu size={22} /></summary><div>{nav.map(([label, page]) => <A page={page} key={page}>{label}</A>)}</div></details>
   </div></header>;
@@ -79,4 +79,3 @@ function App() {
 }
 
 createRoot(document.getElementById('root')!).render(<App />);
-
