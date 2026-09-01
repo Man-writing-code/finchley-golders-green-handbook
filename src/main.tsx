@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState, type ReactNode } from 'react';
-import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ExternalLink, FilePenLine, Landmark, MapPin, Megaphone, Menu, Users, UsersRound } from 'lucide-react';
+import { ArrowDown, ArrowRight, Building2, CalendarDays, CheckCircle2, ExternalLink, FilePenLine, Landmark, MapPin, Megaphone, Menu, Mic, Ticket, Users, UsersRound, Vote } from 'lucide-react';
 import './styles.css';
 
 const pages = ['home', 'calendar', 'get-involved', 'our-clp'] as const;
@@ -41,11 +41,40 @@ function Calendar() {
   return <main className="content-page"><Intro kicker="Meetings and events" title="Calendar">Dates for branch meetings, CLP meetings, campaigning and social events.</Intro><section className="shell embed-section"><div className="embed-heading"><div><CalendarDays size={22} /><h2>Upcoming events</h2></div><a href="https://luma.com/calendar/cal-GocAPBW0BUOu5cK" target="_blank" rel="noreferrer">Open calendar in a new window <ExternalLink size={15} /></a></div><div className="calendar-frame"><iframe src="https://luma.com/embed/calendar/cal-GocAPBW0BUOu5cK/events" title="Finchley and Golders Green Labour events calendar" allowFullScreen /></div><p className="embed-note">If the calendar does not appear, use the link above.</p></section></main>;
 }
 
+const voteRows: [string, string, string][] = [
+  ['CLP and branch officers', 'Once a year, at the AGM', 'In the room at the AGM'],
+  ['Motions at meetings', 'Whenever one is tabled', 'In the room'],
+  ['Conference delegates', 'Once a year', 'In the room'],
+  ['Selections for public office', 'When a vacancy or trigger occurs', 'Postal or online ballot'],
+  ['NEC and NPF representatives', 'On a national cycle', 'Ballot to you, or via delegates'],
+  ['Leader and deputy leader', 'When a vacancy occurs', 'Ballot sent to you'],
+];
+
+const officers: [string, string][] = [
+  ['Chair', 'Runs meetings, keeps them to time and to the rules, and sets the agenda with the Secretary.'],
+  ['Vice Chair', 'Deputises for the Chair, often with a defined brief such as membership or campaigns.'],
+  ['Secretary', 'The engine room. Convenes meetings, sends the notices, keeps the minutes and is the CLP’s formal channel to the regional office.'],
+  ['Treasurer', 'Looks after the money and files what the law and the Party require. Election spending returns carry legal deadlines.'],
+  ['Membership Secretary', 'Welcomes new members, keeps membership records in order and follows up lapsed members.'],
+  ['Political Education Officer', 'Organises the discussions, speakers and training.'],
+  ['Women’s Officer', 'Represents women members and supports the women’s forum.'],
+  ['Youth Officer', 'Represents members under 27 and links to Young Labour.'],
+  ['Trade Union Liaison Officer', 'Connects the CLP with affiliated unions locally.'],
+];
+
+const jargon: [string, string][] = [
+  ['Contemporary motion', 'A motion on one current policy subject, submitted by a CLP or an affiliate for debate at conference.'],
+  ['Priorities ballot', 'Delegates vote on which of the submitted subjects are actually debated. Not everything submitted is heard.'],
+  ['Compositing', 'Motions on the same subject are merged into a single composite motion, in meetings delegates attend.'],
+  ['Conference Arrangements Committee', 'The committee that rules on what is in order and sets the timetable. Usually shortened to CAC.'],
+  ['Card vote', 'A weighted vote in which CLP and affiliate votes are counted separately.'],
+];
+
 const delegateSteps = [
-  ['Check you are eligible', 'For the 2026 draft process, delegates must have been individual members for at least six months by the closing date. The official call for each conference is the final authority.'],
+  ['Check you are eligible', 'You must have been an individual member for at least six months by the closing date, and be up to date with your subscription. The official call for each conference is the final authority.'],
   ['Apply through your branch', 'You can normally self-nominate or be nominated with your consent. Include your name, membership number, the role you seek and confirmation of eligibility.'],
   ['Branch nomination', 'Each branch considers applications and agrees which members to nominate to the General Committee (GC).'],
-  ['GC selection', 'GC delegates agree the final delegation. If a choice is needed, the supplied 2026 draft proposes an anonymous secret ballot.'],
+  ['GC selection', 'GC delegates agree the final delegation. Where a choice is needed, it is decided by secret ballot.'],
 ];
 
 function SpeakerForm() {
@@ -65,14 +94,99 @@ function SpeakerForm() {
 }
 
 function Guide() {
+  const navGroups: [string, [string, string][]][] = [
+    ['Your vote', [['democracy', 'How party democracy works'], ['agm', 'Your CLP AGM'], ['internal-elections', 'Internal Party elections'], ['selections', 'Selections']]],
+    ['Raising something', [['local-motion', 'Ordinary local motions'], ['speakers', 'Suggest a speaker']]],
+    ['Annual Conference', [['conference', 'What conference is'], ['conference-motion', 'Conference motions'], ['delegate', 'Being a delegate']]],
+  ];
   return <main className="content-page"><Intro kicker="Member guide" title="How members can take part">Voting, selections, events, campaigning, conference and the formal routes for raising an issue.</Intro><section className="shell guide-layout">
-    <aside className="guide-nav"><p>On this page</p><a href="#democracy">NEC, NPF and selections</a><a href="#speakers">Suggest a speaker</a><a href="#delegate">Conference delegate</a><a href="#local-motion">Local motions</a><a href="#conference-motion">Conference motions</a><a href="#expectations">What delegates do</a></aside>
-    <div className="guide-content"><article id="democracy" className="guide-section"><span className="section-icon"><Landmark /></span><p className="eyebrow">Membership democracy</p><h2>Your vote and your voice</h2><div className="motion-grid"><div><h3>National Executive Committee (NEC)</h3><p>The NEC is the Party’s national administrative authority, subject to Annual Conference. It oversees organisation, rules, elections and the running of the Party.</p><p>Eligible members vote directly for the NEC seats allocated to individual members when a ballot is held. The Party emails ballot papers and the rules for that election. CLPs can also make nominations through their local meetings.</p></div><div><h3>National Policy Forum (NPF)</h3><p>The NPF and its policy commissions develop the Party’s rolling policy programme for Annual Conference. Members can contribute through policy consultations and local policy discussions.</p><p>Under the 2026 rules, CLPs nominate their regional NPF representatives, while the relevant regional and national delegations at Annual Conference elect them by card vote. This is not normally a direct ballot of every member.</p></div></div><h3>Choosing Labour candidates</h3><p>Members also help select Labour candidates for public office. The process and timetable depend on the election. The 2026 Rule Book says eligible members living in the electoral area, normally with at least six months’ continuous membership, are entitled to participate unless the NEC approves an exception. Watch for official emails and attend any hustings before voting.</p><p className="rule-note">Ballot eligibility and timetables can change. Follow the instructions issued for each election or selection.</p></article>
-    <article id="speakers" className="guide-section"><span className="section-icon"><UsersRound /></span><p className="eyebrow">Meetings and events</p><h2>Suggest a speaker</h2><p>Know someone members would benefit from hearing? Suggest a speaker or topic for a future CLP or branch event. A suggestion does not guarantee an invitation, but it helps the team plan a useful programme.</p><SpeakerForm /></article>
-    <article id="delegate" className="guide-section"><span className="section-icon"><Users /></span><p className="eyebrow">Annual Conference</p><h2>Apply to be a conference delegate</h2><p>Conference delegates represent the CLP in formal conference business: listening to debates, participating in votes and ballots, and helping carry local priorities into the wider party.</p><div className="process-list">{delegateSteps.map(([title, copy], i) => <div className="process-step" key={title}><span>{i + 1}</span><div><h3>{title}</h3><p>{copy}</p></div></div>)}</div><div className="draft-callout"><strong>2026 draft timetable — check before publishing</strong><p>The supplied local draft lists applications by <b>15 May 2026</b>, branch nominations in May, GC selection in June and Party accreditation by <b>12 noon on 26 June 2026</b>. The draft itself flags the accreditation deadline and some costs for confirmation, so members should verify these with their Branch Secretary.</p></div></article>
-    <article id="local-motion" className="guide-section"><span className="section-icon"><FilePenLine /></span><p className="eyebrow">Branch and GC business</p><h2>Ordinary local motions</h2><p>A local motion is a formal way to ask a branch or the General Committee to take a position or action. It is most useful when a clear decision is actually needed. You can also raise questions, volunteer, join a discussion or suggest an activity without writing a motion.</p><ol className="plain-steps"><li><b>Speak to your Branch Secretary first.</b> They can advise whether a motion is needed and tell you the agenda deadline.</li><li><b>Keep it practical.</b> State the issue and the action requested, within the powers of the branch or CLP.</li><li><b>Raise it through your branch.</b> In this delegate CLP, an agreed branch motion can be taken to GC by the branch’s delegates.</li></ol></article>
-    <article id="conference-motion" className="guide-section"><span className="section-icon"><Megaphone /></span><p className="eyebrow">Annual Conference</p><h2>Conference motions are different</h2><p>A contemporary motion asks Annual Conference to consider one current policy subject. Under the 2026 Rule Book, a CLP may submit one; it must be in writing, cover one subject, be no more than 250 words and not be substantially addressed by the NEC or NPF reports.</p><p><b>Local deadline:</b> for this CLP, a proposed conference motion must reach and be agreed by the September GC. Ask the CLP Secretary for the exact agenda deadline before drafting.</p><p className="rule-note"><b>Emergency motions are exceptional.</b> They must concern an urgent and immediate matter that arose after the contemporary-motion deadline and must meet the Conference Arrangements Committee’s deadline and test.</p></article>
-    <article id="expectations" className="guide-section final-guide"><span className="section-icon"><ArrowRight /></span><p className="eyebrow">Representing members</p><h2>What conference delegates commit to</h2><ul className="check-list two-col"><li><CheckCircle2 />Attend conference business while it is in session</li><li><CheckCircle2 />Take part in key votes and ballots</li><li><CheckCircle2 />Engage with briefings on CLP priorities</li><li><CheckCircle2 />Follow safeguarding and behaviour expectations</li><li><CheckCircle2 />Give members a written report after conference</li><li><CheckCircle2 />Answer questions at a GC meeting</li></ul></article></div>
+    <aside className="guide-nav">{navGroups.map(([group, links]) => <div className="nav-group" key={group}><p>{group}</p>{links.map(([id, label]) => <a href={'#' + id} key={id}>{label}</a>)}</div>)}</aside>
+    <div className="guide-content">
+
+    <article id="democracy" className="guide-section"><span className="section-icon"><Landmark /></span><p className="eyebrow">Membership democracy</p><h2>How Party democracy works</h2>
+      <p>Labour makes its decisions by members voting. What confuses people is that the votes happen at different levels, on different timetables, run by different people — so “when do I get a say?” has no single answer. This section is the map; the ones after it are the detail.</p>
+      <p>Most decisions travel upwards: <b>you</b> → <b>your branch</b> → <b>the CLP</b> → <b>Annual Conference</b> → <b>the NEC and National Policy Forum</b>. A motion you write in your branch can end up debated at conference, and a delegate you elect carries the CLP’s vote there. Some decisions come the other way: selection timetables and leadership contests are set nationally, and the CLP runs its part rather than deciding when it happens.</p>
+      <h3>What you get a vote on</h3>
+      <div className="vote-list">{voteRows.map(([what, when, where]) => <div key={what}><strong>{what}</strong><small>{when}</small><small>{where}</small></div>)}</div>
+      <h3>Am I eligible to vote in this?</h3>
+      <p>The most common question of all. The answer depends on how long you have been a member, counted to a fixed cut-off called the <b>relevant date</b> or <b>freeze date</b>. If you qualified on that date you can take part, even if the vote itself happens later.</p>
+      <ul className="check-list"><li><CheckCircle2 /><span><b>8 weeks’ continuous membership</b> — to attend and vote at branch and CLP meetings, and to stand for branch and CLP roles</span></li><li><CheckCircle2 /><span><b>6 months’ continuous membership</b> — to be a delegate to Annual Conference</span></li><li><CheckCircle2 /><span><b>12 months’ continuous membership</b> — for some national roles and elections</span></li></ul>
+      <p>You also need to be up to date with your subscription: a member in arrears cannot vote at Party meetings. This is much easier to fix a fortnight before a meeting than on the night.</p>
+      <p className="rule-note"><b>Nominating is not voting.</b> For most national elections the CLP meets and votes on who to <i>nominate</i>. That is a public endorsement, not the election. The ballot itself comes to you separately, and you are free to vote for someone else.</p>
+    </article>
+
+    <article id="agm" className="guide-section"><span className="section-icon"><UsersRound /></span><p className="eyebrow">Local elections</p><h2>Your CLP AGM</h2>
+      <p>The Annual General Meeting is the one meeting a year where members decide who runs the local Party. It is on a fixed annual cycle, everything about it is decided by us rather than nationally, and any member of eight weeks’ standing can vote and can stand. If you have ever thought “I’d quite like to do something”, this is where that turns into a job.</p>
+      <p>The AGM elects the CLP officers, other committee places, and delegates to conference and other bodies. Each ward branch elects its own officers at a branch AGM, usually held in the weeks before. Branch roles are a smaller commitment and are the normal way people start — branches are where campaigning actually gets organised.</p>
+      <h3>The officers, and what they actually do</h3>
+      <div className="officer-list">{officers.map(([role, copy]) => <div key={role}><h3>{role}</h3><p>{copy}</p></div>)}</div>
+      <h3>How to stand</h3>
+      <ol className="plain-steps">
+        <li><b>Decide roughly what you would want to do.</b> If you are unsure, ask the current holder what the job is really like. Most will tell you honestly.</li>
+        <li><b>Find a proposer.</b> Anyone eligible to vote in the CLP can propose you.</li>
+        <li><b>Get your nomination in before the deadline.</b> The Secretary’s notice sets out the posts, the deadline and the format. The deadline is usually well before the meeting, and missing it is the most common reason people do not stand.</li>
+        <li><b>Write a short statement.</b> A few sentences on why you want the role beats a CV.</li>
+        <li><b>Turn up.</b> Contested posts involve a brief speech and then a vote.</li>
+      </ol>
+      <p className="rule-note">You do not need permission and you do not need years of membership. Eight weeks and a proposer is the whole requirement. Some posts attract no nominations at all and are filled from the floor on the night.</p>
+    </article>
+
+    <article id="internal-elections" className="guide-section"><span className="section-icon"><Vote /></span><p className="eyebrow">National ballots</p><h2>Internal Party elections</h2>
+      <div className="motion-grid">
+        <div><h3>National Executive Committee (NEC)</h3><p>The NEC is the Party’s national administrative authority, subject to Annual Conference. It oversees organisation, rules, elections and the running of the Party.</p><p>Eligible members vote directly for the seats allocated to individual members when a ballot is held. The Party emails ballot papers and the rules for that election. CLPs also make nominations through local meetings.</p></div>
+        <div><h3>National Policy Forum (NPF)</h3><p>The NPF and its policy commissions develop the Party’s rolling policy programme for Annual Conference. Members can contribute through policy consultations and local policy discussions.</p><p>CLPs nominate their regional NPF representatives, and the relevant delegations at Annual Conference elect them by card vote. This is not normally a direct ballot of every member.</p></div>
+      </div>
+      <p>Leadership and deputy leadership contests also run nationally, on their own timetable, with a ballot sent to eligible members directly.</p>
+      <p className="rule-note">Eligibility and timetables are set for each contest individually. Follow the instructions issued with that election, and check the freeze date if you joined recently.</p>
+    </article>
+
+    <article id="selections" className="guide-section"><span className="section-icon"><Users /></span><p className="eyebrow">Choosing candidates</p><h2>Selections for public office</h2>
+      <p>Members also choose Labour’s candidates for public office: Member of Parliament, councillor, London Assembly Member and Mayor. These are separate from the internal elections above — different timetables, different electorates and their own rules each time.</p>
+      <p>Selections are triggered by a vacancy or by a trigger process, and the timetable is set regionally or nationally rather than by the CLP. Eligible members living in the electoral area, normally with at least six months’ continuous membership, are entitled to take part unless the NEC approves an exception.</p>
+      <ol className="plain-steps">
+        <li><b>Watch for the official email.</b> Selections move quickly once opened, and the notice carries the rules for that contest.</li>
+        <li><b>Attend the hustings.</b> Candidates make their case and take questions.</li>
+        <li><b>Vote in the ballot.</b> Usually one member one vote, by post or online.</li>
+      </ol>
+      <p className="rule-note">Ballot eligibility and timetables change between contests. The instructions issued for the specific selection are always the authority.</p>
+    </article>
+
+    <article id="local-motion" className="guide-section"><span className="section-icon"><FilePenLine /></span><p className="eyebrow">Branch and GC business</p><h2>Ordinary local motions</h2>
+      <p>A local motion is a formal way to ask a branch or the General Committee to take a position or action. It is most useful when a clear decision is actually needed. You can also raise questions, volunteer, join a discussion or suggest an activity without writing a motion.</p>
+      <ol className="plain-steps">
+        <li><b>Speak to your Branch Secretary first.</b> They can advise whether a motion is needed and tell you the agenda deadline.</li>
+        <li><b>Keep it practical.</b> State the issue and the action requested, within the powers of the branch or CLP.</li>
+        <li><b>Raise it through your branch.</b> In this delegate CLP, an agreed branch motion can be taken to the GC by the branch’s delegates.</li>
+      </ol>
+      <p className="rule-note">Motions to Annual Conference are a different thing with different rules — see <a href="#conference-motion">conference motions</a>.</p>
+    </article>
+
+    <article id="speakers" className="guide-section"><span className="section-icon"><Mic /></span><p className="eyebrow">Meetings and events</p><h2>Suggest a speaker</h2><p>Know someone members would benefit from hearing? Suggest a speaker or topic for a future CLP or branch event. A suggestion does not guarantee an invitation, but it helps the team plan a useful programme.</p><SpeakerForm /></article>
+
+    <article id="conference" className="guide-section"><span className="section-icon"><Building2 /></span><p className="eyebrow">Annual Conference</p><h2>What conference is</h2>
+      <p>Annual Conference is the Party’s sovereign decision-making body. It agrees policy, decides rule changes, hears the reports of the NEC and the National Policy Forum, and elects a number of national positions. CLPs are represented there by delegates that members elect — which is how a decision taken in a branch meeting in Finchley can end up as Party policy.</p>
+      <p>Conference has its own vocabulary, and it puts people off more than the process itself does:</p>
+      <div className="officer-list">{jargon.map(([term, copy]) => <div key={term}><h3>{term}</h3><p>{copy}</p></div>)}</div>
+      <p className="rule-note">Two ways to take part: <a href="#conference-motion">send a motion</a>, or <a href="#delegate">go as a delegate</a>. They are separate processes with separate deadlines, and you can do either without the other.</p>
+    </article>
+
+    <article id="conference-motion" className="guide-section"><span className="section-icon"><Megaphone /></span><p className="eyebrow">Annual Conference</p><h2>Conference motions</h2>
+      <p>A contemporary motion asks Annual Conference to consider one current policy subject. A CLP may submit one. It must be in writing, cover a single subject, be no more than 250 words, and not be substantially addressed by the NEC or NPF reports already.</p>
+      <p>Because only one motion goes forward, it has to be agreed by the CLP rather than simply submitted by a member. Bring it through your branch in good time — a motion that arrives the week of the deadline rarely makes it.</p>
+      <p><b>Local deadline:</b> a proposed conference motion must reach and be agreed by the September GC. Ask the CLP Secretary for the exact agenda deadline before drafting.</p>
+      <p className="rule-note"><b>Emergency motions are exceptional.</b> They must concern an urgent matter that arose after the contemporary-motion deadline, and must meet the Conference Arrangements Committee’s own deadline and test.</p>
+    </article>
+
+    <article id="delegate" className="guide-section final-guide"><span className="section-icon"><Ticket /></span><p className="eyebrow">Annual Conference</p><h2>Being a delegate</h2>
+      <p>Conference delegates represent the CLP in formal conference business: listening to debates, taking part in votes and ballots, and carrying local priorities into the wider Party. You need six months’ continuous membership, and at least every second delegate a CLP sends must be a woman — so the make-up of the delegation affects who can be elected in a given year.</p>
+      <h3>How to apply</h3>
+      <div className="process-list">{delegateSteps.map(([title, copy], i) => <div className="process-step" key={title}><span>{i + 1}</span><div><h3>{title}</h3><p>{copy}</p></div></div>)}</div>
+      <div className="draft-callout"><strong>Timetable — dates to be confirmed</strong><p>The cycle runs in this order: <b>applications</b> close, then <b>branch nominations</b>, then <b>GC selection</b>, then <b>Party accreditation</b>. Dates for the next conference will be published here once confirmed. Ask your Branch Secretary in the meantime, and check whether any costs are covered before you apply.</p></div>
+      <h3>What delegates commit to</h3>
+      <ul className="check-list two-col"><li><CheckCircle2 />Attend conference business while it is in session</li><li><CheckCircle2 />Take part in key votes and ballots</li><li><CheckCircle2 />Engage with briefings on CLP priorities</li><li><CheckCircle2 />Follow safeguarding and behaviour expectations</li><li><CheckCircle2 />Give members a written report after conference</li><li><CheckCircle2 />Answer questions at a GC meeting</li></ul>
+    </article>
+
+    </div>
   </section></main>;
 }
 

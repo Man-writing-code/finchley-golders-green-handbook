@@ -41,3 +41,15 @@
 .form-success h3,.form-success p { margin:0; }
 .form-success p { margin-top:5px; }
 .form-response-frame { display:none; }
+
+.guide-nav .nav-group { display:grid; }
+.guide-nav .nav-group + .nav-group { margin-top:18px; padding-top:14px; border-top:1px solid var(--line); }
+.vote-list { display:grid; margin-top:22px; border-top:1px solid var(--line); }
+.vote-list > div { display:grid; grid-template-columns:1.5fr 1fr 1.2fr; gap:18px; align-items:baseline; padding:13px 0; border-bottom:1px solid var(--line); }
+.vote-list strong { font-size:14.5px; color:var(--ink); }
+.vote-list small { font-size:13px; color:var(--muted); }
+.officer-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 32px; margin-top:22px; }
+.officer-list h3 { margin:0 0 4px; font-size:15px; }
+.officer-list p { margin:0; font-size:14px; line-height:1.5; }
+.check-list li span { line-height:1.45; }
+@media(max-width:700px){ .vote-list > div { grid-template-columns:1fr; gap:3px; } .officer-list { grid-template-columns:1fr; } }
